@@ -12,6 +12,9 @@ COPY ["TicTacToe.UnitTests/TicTacToe.UnitTests.csproj", "TicTacToe.UnitTests/"]
 RUN dotnet restore
 
 COPY . .
+
+RUN dotnet test
+
 RUN dotnet publish TicTacToe.Api -c Release -o /app/publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime

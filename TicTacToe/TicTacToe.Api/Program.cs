@@ -56,6 +56,12 @@ app.UseExceptionHandler(appError =>
     });
 });
 
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<TicTacToeContext>();
+    dbContext.Database.Migrate();
+}
+
 app.MapGet("/health", () => Results.Ok());
 
 // app.UseHttpsRedirection();
